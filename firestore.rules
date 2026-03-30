@@ -1,0 +1,34 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && 
+        (request.auth.token.email == "im.nileshrathod@gmail.com" && request.auth.token.email_verified == true);
+    }
+
+    function isValidRegistration(data) {
+      return data.mandal is string && data.mandal.size() > 0 &&
+             data.name is string && data.name.size() > 0 &&
+             data.phone is string && data.phone.size() >= 10 &&
+             data.arrivalDate is string &&
+             data.guestCount is number && data.guestCount >= 0 &&
+             data.breakfastCount is number && data.breakfastCount >= 0 &&
+             data.lunchCount is number && data.lunchCount >= 0 &&
+             data.dinnerCount is number && data.dinnerCount >= 0;
+    }
+
+    match /registrations/{registrationId} {
+      // Public can create registrations
+      allow create: if isValidRegistration(request.resource.data);
+      
+      // Admin access (unauthenticated for this specific request)
+      // Note: In a production app, this should be secured with Auth.
+      allow read, update, delete: if true;
+    }
+  }
+}

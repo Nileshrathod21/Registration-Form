@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --color-saffron: #FF9933;
+  --color-saffron-dark: #FF6600;
+  --color-spiritual-bg: #FFF9E6;
+  --color-spiritual-accent: #4D2600;
+  --color-spiritual-gold: #FFD700;
+}
+
+@layer base {
+  body {
+    @apply bg-spiritual-bg text-spiritual-accent min-h-screen font-sans;
+  }
+}
+
+.spiritual-card {
+  @apply bg-white rounded-2xl shadow-xl border-t-4 border-saffron p-6;
+}
+
+.spiritual-input {
+  @apply w-full px-4 py-3 rounded-xl border-2 border-orange-100 focus:border-saffron focus:ring-2 focus:ring-saffron/20 outline-none transition-all bg-orange-50/30;
+}
+
+.spiritual-button {
+  @apply w-full py-4 bg-saffron hover:bg-saffron-dark text-white font-bold rounded-xl shadow-lg shadow-saffron/30 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.spiritual-label {
+  @apply block text-sm font-semibold text-spiritual-accent mb-1 ml-1;
+}

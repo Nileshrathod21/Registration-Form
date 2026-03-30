@@ -1,0 +1,54 @@
+{
+  "entities": {
+    "registrations": {
+      "title": "Guest Registration",
+      "description": "A record of a guest's visit and meal requirements.",
+      "type": "object",
+      "properties": {
+        "mandal": {
+          "type": "string",
+          "description": "The mandal name."
+        },
+        "name": {
+          "type": "string",
+          "description": "Guest's name."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Guest's phone number."
+        },
+        "arrivalDate": {
+          "type": "string",
+          "description": "Date of arrival (ISO string)."
+        },
+        "guestCount": {
+          "type": "number",
+          "description": "Total number of guests."
+        },
+        "breakfastCount": {
+          "type": "number",
+          "description": "Number of people eating breakfast."
+        },
+        "lunchCount": {
+          "type": "number",
+          "description": "Number of people eating lunch."
+        },
+        "dinnerCount": {
+          "type": "number",
+          "description": "Number of people eating dinner."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp of creation."
+        }
+      },
+      "required": ["mandal", "name", "phone", "arrivalDate", "guestCount"]
+    }
+  },
+  "firestore": {
+    "/registrations/{registrationId}": {
+      "schema": "registrations",
+      "description": "Collection of guest registrations."
+    }
+  }
+}
